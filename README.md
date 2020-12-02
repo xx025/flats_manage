@@ -49,3 +49,112 @@ Java+JDBC+Mysql
             2. 新添加房间需要满足`room.loc`不重复,id同人员
 
 #### 项目地址: https://github.com/xx025/flats_manage
+
+
+## 创建数据库并插入数据
+
+```sql
+-- --------------------------------------------------------
+-- 主机:                           127.0.0.1
+-- 服务器版本:                        5.5.27 - MySQL Community Server (GPL)
+-- 服务器操作系统:                      Win64
+-- HeidiSQL 版本:                  11.0.0.5919
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- 导出 b1dx0 的数据库结构
+CREATE DATABASE IF NOT EXISTS `b1dx0` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `b1dx0`;
+
+-- 导出  表 b1dx0.people 结构
+CREATE TABLE IF NOT EXISTS `people` (
+  `pid` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(32) NOT NULL,
+  `sex` varchar(2) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  PRIMARY KEY (`pid`),
+  KEY `rom_id` (`room_id`),
+  CONSTRAINT `rom_id` FOREIGN KEY (`room_id`) REFERENCES `room` (`rid`)
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+
+-- 正在导出表  b1dx0.people 的数据：~25 rows (大约)
+DELETE FROM `people`;
+/*!40000 ALTER TABLE `people` DISABLE KEYS */;
+INSERT INTO `people` (`pid`, `NAME`, `sex`, `room_id`) VALUES
+	(14, '林黛玉', '女', 11),
+	(16, '妙玉', '女', 13),
+	(17, '李纨', '女', 18),
+	(18, '迎春', '女', 14),
+	(19, '探春', '女', 15),
+	(20, '惜春', '女', 16),
+	(21, '妙玉', '女', 16),
+	(22, '雪雁', '女', 11),
+	(26, '紫娟', '女', 11),
+	(27, '莺儿', '女', 12),
+	(28, '王熙凤', '女', 19),
+	(29, '平儿', '女', 19),
+	(30, '贾琏', '男', 19),
+	(31, '贾母', '女', 19),
+	(33, '莺哥', '女', 19),
+	(34, '贾敬', '男', 19),
+	(35, '王夫人', '女', 19),
+	(36, '湘云', '女', 12),
+	(37, '秦可卿', '女', 21),
+	(38, '尤氏', '女', 21),
+	(40, '林如海', '男', 22),
+	(41, '贾敏', '女', 22),
+	(44, '宝玉', '男', 10),
+	(45, '风丫头', '女', 19),
+	(46, '风', '女', 11);
+/*!40000 ALTER TABLE `people` ENABLE KEYS */;
+
+-- 导出  表 b1dx0.room 结构
+CREATE TABLE IF NOT EXISTS `room` (
+  `rid` int(11) NOT NULL AUTO_INCREMENT,
+  `loc` varchar(32) NOT NULL,
+  `vol` int(11) DEFAULT '6',
+  PRIMARY KEY (`rid`),
+  UNIQUE KEY `loc` (`loc`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+-- 正在导出表  b1dx0.room 的数据：~12 rows (大约)
+DELETE FROM `room`;
+/*!40000 ALTER TABLE `room` DISABLE KEYS */;
+INSERT INTO `room` (`rid`, `loc`, `vol`) VALUES
+	(10, '怡红院', 5),
+	(11, '潇湘馆', 5),
+	(12, '蘅芜苑', 5),
+	(13, '栊翠庵', 5),
+	(14, '紫菱洲', 5),
+	(15, '秋爽斋', 6),
+	(16, '藕香榭', 5),
+	(18, '稻香村', 5),
+	(19, '荣国府', 16),
+	(21, '宁国府', 16),
+	(22, '林府', 10),
+	(23, '馒头庵', 4);
+/*!40000 ALTER TABLE `room` ENABLE KEYS */;
+
+-- 导出  表 b1dx0.steward 结构
+CREATE TABLE IF NOT EXISTS `steward` (
+  `USER` varchar(32) DEFAULT NULL,
+  `PASSWORD` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 正在导出表  b1dx0.steward 的数据：~1 rows (大约)
+DELETE FROM `steward`;
+/*!40000 ALTER TABLE `steward` DISABLE KEYS */;
+INSERT INTO `steward` (`USER`, `PASSWORD`) VALUES
+	('admin', 'admin');
+/*!40000 ALTER TABLE `steward` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+```
